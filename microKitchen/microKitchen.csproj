@@ -55,7 +55,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ShoppingList.cs" />
+    <Compile Include="Shopping\ShoppingList.cs" />
+    <Compile Include="Windows\AddShoppingItem.cs" />
+    <Compile Include="Windows\HomeWindow.cs" />
+    <Compile Include="Windows\ShoppingWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">
@@ -137,5 +140,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Keyboard_320x128_Symbols.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Modal.gif" />
   </ItemGroup>
 </Project>

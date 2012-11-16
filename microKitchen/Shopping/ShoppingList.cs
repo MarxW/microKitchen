@@ -2,8 +2,9 @@ using System;
 using Microsoft.SPOT;
 using System.Collections;
 using GHIElectronics.NETMF.Glide.UI;
+using Microsoft.SPOT.Hardware;
 
-namespace microKitchen
+namespace microKitchen.Shopping
 {
 
     enum ShoppingItemTypes

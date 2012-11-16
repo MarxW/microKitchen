@@ -5,6 +5,7 @@ using System.Threading;
 using GHIElectronics.NETMF.Glide.Display;
 using GHIElectronics.NETMF.Glide.UI;
 using GHIElectronics.NETMF.Glide;
+using microKitchen.Shopping;
 
 namespace microKitchen
 {
@@ -79,15 +80,7 @@ namespace microKitchen
             keyContent[3] = new string[5] { Keyboard.ActionKey.ToLetters, ",", Keyboard.ActionKey.Space, ".", Keyboard.ActionKey.Return };
             keyboard.SetViewKeyContent(Keyboard.View.Symbols, keyContent);
 
-            // or we could just call this:
-            // keyboard.DefaultKeyContent();
-
             int[][] keyWidth = new int[4][];
-
-            // Each array entry represents a row of keys on the keyboard top-down (0-3)
-            // Each array within these entries contains the widths of the keys for that row.
-            // For example: keyWidth[0] = new int[10] { 48, 48, 48, 48, 48, 48, 48, 48, 48, 48 }
-            // represents the first row (0) which contains the keys Q, W, E, R, T, Y, U, I, O, P
 
             // Letters
             keyWidth[0] = new int[10] { 32, 32, 32, 32, 32, 32, 32, 32, 32, 32 };
