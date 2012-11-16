@@ -24,19 +24,8 @@ namespace microKitchen
         void ProgramStarted()
         {
             Glide.FitToScreen = true;
-            Glide.Keyboard = Helper.InitKeyboard();
+            Glide.MainWindow = new HomeWindow();
             
-            windows[0] = GlideLoader.LoadWindow(Resources.GetString(Resources.StringResources.windowHome));
-            windows[1] = GlideLoader.LoadWindow(Resources.GetString(Resources.StringResources.windowMusicPlayer));
-            windows[2] = GlideLoader.LoadWindow(Resources.GetString(Resources.StringResources.windowShopping));
-            windows[3] = GlideLoader.LoadWindow(Resources.GetString(Resources.StringResources.windowShoppingList));
-
-            GlideTouch.Initialize();
-
-            SetupWindows();
-
-            Glide.MainWindow = windows[0];
-
             Debug.Print("Program Started");
             //Thread.Sleep(-1);
         }
