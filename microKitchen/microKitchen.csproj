@@ -60,6 +60,7 @@
     <Compile Include="Windows\AddShoppingItem.cs" />
     <Compile Include="Windows\HomeWindow.cs" />
     <Compile Include="Windows\ShoppingWindow.cs" />
+    <Compile Include="Windows\SplashScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">
@@ -126,5 +127,6 @@
     <Content Include="Resources\Keyboard_480x272_Symbols.gif" />
     <Content Include="Resources\Keyboard_480x272_Uppercase.gif" />
     <Content Include="Resources\Modal.gif" />
+    <None Include="Resources\splashscreen.jpg" />
   </ItemGroup>
 </Project>

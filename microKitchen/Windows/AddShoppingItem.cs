@@ -1,7 +1,7 @@
 using System;
 using Microsoft.SPOT;
 using GHIElectronics.NETMF.Glide.UI;
-using microKitchen.Shopping;
+using microKitchen.Model;
 using GHIElectronics.NETMF.Glide;
 using GHIElectronics.NETMF.Glide.Display;
 using Gadgeteer;

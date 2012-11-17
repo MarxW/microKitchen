@@ -3,7 +3,7 @@ using Microsoft.SPOT;
 using GHIElectronics.NETMF.Glide.Display;
 using GHIElectronics.NETMF.Glide.UI;
 using GHIElectronics.NETMF.Glide;
-using microKitchen.Shopping;
+using microKitchen.Model;
 
 namespace microKitchen.Windows
 {

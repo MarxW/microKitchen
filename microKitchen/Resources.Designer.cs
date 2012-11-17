@@ -41,6 +41,7 @@ namespace microKitchen
         internal enum BitmapResources : short
         {
             Keyboard_320x128_Uppercase = -23410,
+            splashscreen = -12044,
             Modal = -11358,
             Keyboard_320x128_Lowercase = 10399,
             Keyboard_320x128_Symbols = 13574,

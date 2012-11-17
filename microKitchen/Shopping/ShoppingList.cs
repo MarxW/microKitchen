@@ -4,7 +4,7 @@ using System.Collections;
 using GHIElectronics.NETMF.Glide.UI;
 using Microsoft.SPOT.Hardware;
 
-namespace microKitchen.Shopping
+namespace microKitchen.Model
 {
     [Serializable]
     enum ShoppingItemTypes

@@ -9,37 +9,32 @@ namespace microKitchen.Windows
 
     class HomeWindow : Window
     {
-        private Button buttonNavigateToShopping;
 
-        public Button ButtonNavigateToShopping
-        {
-            get { return this.buttonNavigateToShopping; }
-        }
+        public Button ButtonNavigateToShopping { get; internal set; }
 
         #region "Initialise"
 
         public HomeWindow(string name, int width, int height)
             : base(name, width, height)
         {
-            this.BackColor = Colors.White;
             this.InitWindow();
         }
 
         public HomeWindow()
             : base("homeWindow", 320, 240)
         {
-            this.BackColor = Colors.White;
             this.InitWindow();
         }
 
         private void InitWindow()
         {
-            this.buttonNavigateToShopping = new Button("buttonNavigateToShopping", 0, 6, 190, 110, 32);
-            this.buttonNavigateToShopping.Text = "Shopping";
-            this.buttonNavigateToShopping.TintColor = Colors.Black;
-            this.buttonNavigateToShopping.TintAmount = 10;
-            this.buttonNavigateToShopping.TapEvent += new OnTap(OnButtonShopping_Taped); 
-            this.AddChild(this.buttonNavigateToShopping);
+            this.BackColor = Colors.White;
+            this.ButtonNavigateToShopping = new Button("buttonNavigateToShopping", 0, 6, 190, 110, 32);
+            this.ButtonNavigateToShopping.Text = "Shopping";
+            this.ButtonNavigateToShopping.TintColor = Colors.Black;
+            this.ButtonNavigateToShopping.TintAmount = 10;
+            this.ButtonNavigateToShopping.TapEvent += new OnTap(OnButtonShopping_Taped);
+            this.AddChild(this.ButtonNavigateToShopping);
         }
 
         #endregion

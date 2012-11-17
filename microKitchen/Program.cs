@@ -13,6 +13,7 @@ using GTM = Gadgeteer.Modules;
 using Gadgeteer.Modules.GHIElectronics;
 using GHIElectronics.NETMF.Glide.Display;
 using GHIElectronics.NETMF.Glide;
+using microKitchen.Windows;
 
 namespace microKitchen
 {
@@ -25,6 +26,10 @@ namespace microKitchen
             Glide.Keyboard = Helper.InitKeyboard();
 
             GlideTouch.Initialize();
+
+            Glide.MainWindow = new SplashScreen();
+            Thread.Sleep(4000);
+            
             if (!GlideTouch.Calibrated)
             {
                 CalibrationWindow calWindow = new CalibrationWindow(false, true);
@@ -33,7 +38,7 @@ namespace microKitchen
             }
             else
             {
-                Glide.MainWindow = new Windows.HomeWindow();
+                Glide.MainWindow = new HomeWindow();
             }
 
             try

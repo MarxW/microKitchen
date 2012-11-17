@@ -4,7 +4,7 @@ using Microsoft.SPOT.IO;
 using System.IO;
 using System.Text;
 using GHI.OSHW.Hardware;
-using microKitchen.Shopping;
+using microKitchen.Model;
 using Gadgeteer.Modules.GHIElectronics;
 
 namespace microKitchen.Helpers
