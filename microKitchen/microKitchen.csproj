@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -71,7 +71,7 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="GHIElectronics.NETMF.Glide">
-      <HintPath>C:\Users\Wolfgang\Desktop\netmfglide-19095\Glide\bin\Release\GHIElectronics.NETMF.Glide.dll</HintPath>
+      <HintPath>..\netmfglide-19095\Glide\bin\Release\GHIElectronics.NETMF.Glide.dll</HintPath>
     </Reference>
     <Reference Include="GTM.GHIElectronics.Display_T35, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
