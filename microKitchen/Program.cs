@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
-
+using Microsoft.SPOT;
+using Microsoft.SPOT.Presentation;
+using Microsoft.SPOT.Presentation.Controls;
+using Microsoft.SPOT.Presentation.Media;
+using Microsoft.SPOT.Touch;
 
 using Gadgeteer.Networking;
 using GT = Gadgeteer;
@@ -9,165 +13,43 @@ using GTM = Gadgeteer.Modules;
 using Gadgeteer.Modules.GHIElectronics;
 using GHIElectronics.NETMF.Glide.Display;
 using GHIElectronics.NETMF.Glide;
-using GHIElectronics.NETMF.Glide.UI;
-using Microsoft.SPOT;
-using microKitchen.Shopping;
 
 namespace microKitchen
 {
     public partial class Program
     {
-        static Window[] windows = new Window[4];
-        static int curentWindow = 0;
-
+        // This method is run when the mainboard is powered up or reset.   
         void ProgramStarted()
         {
             Glide.FitToScreen = true;
+            Glide.Keyboard = Helper.InitKeyboard();
+
             GlideTouch.Initialize();
-            Glide.MainWindow = new Windows.HomeWindow();
-            
+            if (!GlideTouch.Calibrated)
+            {
+                CalibrationWindow calWindow = new CalibrationWindow(false, true);
+                calWindow.CloseEvent += new OnClose(calWindow_CloseEvent);
+                Glide.MainWindow = calWindow;
+            }
+            else
+            {
+                Glide.MainWindow = new Windows.HomeWindow();
+            }
+
+            try
+            {
+                sdCard.MountSDCard();
+            }
+            catch
+            {
+                Glide.MessageBoxManager.Show("There was a problem loading the SD Card.");
+            }
             Debug.Print("Program Started");
-            //Thread.Sleep(-1);
         }
 
-        
-        #region "main Window"
-
-        static void InitMainWindow()
+        void calWindow_CloseEvent(object sender)
         {
-            Button buttonMusic = (Button)(windows[0]).GetChildByName("buttonMusic");
-            buttonMusic.TapEvent += new OnTap(buttonNavidateToMusic_click);
-            Button buttonShopping = (Button)(windows[0]).GetChildByName("buttonShopping");
-            buttonShopping.TapEvent += new OnTap(buttonNavidateToShopping_click);
+            Glide.MainWindow = new Windows.HomeWindow();
         }
-
-        static void buttonNavidateToMusic_click(object sender)
-        {
-            curentWindow = 1;
-            Tween.SlideWindow(windows[0], windows[1], Direction.Up);
-        }
-
-        static void buttonNavidateToShopping_click(object sender)
-        {
-            curentWindow = 3;
-            Tween.SlideWindow(windows[0], windows[3], Direction.Up);
-        }
-
-        #endregion
-
-        
-        #region "shopping List"
-
-        
-
-        //static void InitShoppingList()
-        //{
-        //    DataGrid data = (DataGrid)windows[3].GetChildByName("gridShoppingList");
-        //    data.AddColumn(new DataGridColumn("Name", 180));
-        //    data.AddColumn(new DataGridColumn("Type", 90));
-        //    data.AddColumn(new DataGridColumn("Number", 40));
-        //    UpdateShoppingListGrid();
-        //    Button buttonExit = (Button)windows[3].GetChildByName("buttonHome");
-        //    buttonExit.TapEvent += new OnTap(buttonNavidateToHomeWindow_click);
-        //    Button buttonNewItem = (Button)windows[3].GetChildByName("buttonAddItem");
-        //    buttonNewItem.TapEvent += new OnTap(displayNewShopingListItem_click);
-        //}
-
-        //static void displayNewShopingListItem_click(object sender)
-        //{
-        //    curentWindow = 2;
-        //    Tween.SlideWindow(windows[3], windows[2], Direction.Up);
-        //}
-
-        #endregion
-
-        #region "shopping Window"
-
-        //static void InitShoppingWindow()
-        //{
-        //    Button buttonExit = (Button)windows[2].GetChildByName("buttonCancel");
-        //    buttonExit.TapEvent += new OnTap(cancelAddShoppingItem_click);
-        //    TextBox textBox = (TextBox)(windows[2]).GetChildByName("textBoxItem");
-        //    textBox.TapEvent += new OnTap(Glide.OpenKeyboard);
-        //    textBox.ValueChangedEvent += new OnValueChanged(shoppingTextBoxItem_ValueChangedEvent);
-
-        //    Dropdown dropDownCategories = (Dropdown)windows[2].GetChildByName("dropdownCategory");
-        //    dropDownCategories.Options.Add(new object[] {ShoppingItemTypes.Dairy.GetStringValue(), ShoppingItemTypes.Dairy.GetStringValue()});
-        //    dropDownCategories.Options.Add(new object[] {ShoppingItemTypes.Frozen.GetStringValue(), ShoppingItemTypes.Frozen.GetStringValue()});
-        //    dropDownCategories.Options.Add(new object[] {ShoppingItemTypes.Meat_SeaFood.GetStringValue(), ShoppingItemTypes.Meat_SeaFood.GetStringValue()});
-        //    dropDownCategories.Options.Add(new object[] {ShoppingItemTypes.UnCategorised.GetStringValue(), ShoppingItemTypes.UnCategorised.GetStringValue()});
-
-        //    shoppingTypes = new List(dropDownCategories.Options, 200);
-        //    shoppingTypes.CloseEvent += new OnClose(shoppingTypes_CloseEvent);
-
-        //    dropDownCategories.TapEvent += new OnTap(dropDownCategories_TapEvent);
-        //    dropDownCategories.Invalidate();
-        //    Button buttonAddItem = (Button)(windows[2]).GetChildByName("buttonAdd");
-        //    buttonAddItem.TapEvent += new OnTap(addShoppingListItem_click);
-        //}
-
-        //static void dropDownCategories_TapEvent(object sender)
-        //{
-        //    Glide.OpenList(sender, shoppingTypes);
-        //}
-
-        static void shoppingTypes_CloseEvent(object sender)
-        {
-            Glide.CloseList();
-        }
-
-        static void cancelAddShoppingItem_click(object sender)
-        {
-            TextBox textBox = (TextBox)(windows[2]).GetChildByName("textBoxItem");
-            textBox.Text = string.Empty;
-            textBox.Invalidate();
-            curentWindow = 3;
-            Tween.SlideWindow(windows[2], windows[3], Direction.Down);
-        }
-
-        //static void addShoppingListItem_click(object sender)
-        //{
-        //    TextBox textBox = (TextBox)(windows[2]).GetChildByName("textBoxItem");
-        //    if (! "".Equals(textBox.Text.Trim()))
-        //    {
-        //        Dropdown dropDownCategories = (Dropdown)windows[2].GetChildByName("dropdownCategory");
-        //        Debug.Print("adding " + textBox.Text);
-        //        shoppingList.Add(textBox.Text, dropDownCategories.Value.ToString().ToShoppingItemTypes(), 1);
-        //        textBox.Text = string.Empty;
-        //        textBox.Invalidate();
-        //        Debug.Print("cart has " + shoppingList.Length() + " items");
-        //        UpdateShoppingListGrid();
-        //        curentWindow = 3;
-        //        Tween.SlideWindow(windows[2], windows[3], Direction.Down);
-        //    }
-        //}
-
-        static void shoppingTextBoxItem_ValueChangedEvent(object sender)
-        {
-            TextBox textBox = (TextBox)(windows[2]).GetChildByName("textBoxItem");
-            Debug.Print(textBox.Text);
-        }
-
-        #endregion
-
-
-
-
-        #region "music Window"
-
-        static void InitMusicWindow()
-        {
-            Button buttonExit = (Button)(windows[1]).GetChildByName("buttonHome");
-            buttonExit.TapEvent += new OnTap(buttonNavidateToHomeWindow_click);
-        }
-
-        static void buttonNavidateToHomeWindow_click(object sender)
-        {
-            Tween.SlideWindow(windows[curentWindow], windows[0], Direction.Down);
-        }
-
-        #endregion
-
-
     }
 }

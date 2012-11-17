@@ -1,4 +1,4 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("microKitchen")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("MarxW")]
+[assembly: AssemblyCompany("TOSHIBA")]
 [assembly: AssemblyProduct("microKitchen")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("Copyright © TOSHIBA 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

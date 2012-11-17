@@ -17,8 +17,8 @@ namespace microKitchen
     {
         // GTM.Module definitions
         Gadgeteer.Modules.GHIElectronics.Display_T35 display_T35;
-        Gadgeteer.Modules.GHIElectronics.UsbClientSP usbClientSP;
-        Gadgeteer.Modules.GHIElectronics.Music music;
+        Gadgeteer.Modules.GHIElectronics.UsbClientDP usbClientDP;
+        Gadgeteer.Modules.GHIElectronics.SDCard sdCard;
 
         public static void Main()
         {
@@ -34,9 +34,9 @@ namespace microKitchen
         private void InitializeModules()
         {   
             // Initialize GTM.Modules and event handlers here.		
-            usbClientSP = new GTM.GHIElectronics.UsbClientSP(2);
+            usbClientDP = new GTM.GHIElectronics.UsbClientDP(2);
 		
-            music = new GTM.GHIElectronics.Music(3);
+            sdCard = new GTM.GHIElectronics.SDCard(8);
 		
             display_T35 = new GTM.GHIElectronics.Display_T35(10, 11, 12, 13);
 

@@ -12,6 +12,7 @@ namespace microKitchen.Windows
         private Button bNavigateToHome, bAddShoppingItem;
         private DataGrid dgShoppingList;
         private ShoppingList shoppingList;
+        private AddShoppingItemDialog addShoppingItemDialog;
 
         public ShoppingList ShoppingList
         {
@@ -71,7 +72,7 @@ namespace microKitchen.Windows
             this.bAddShoppingItem.TapEvent += new OnTap(OnButtonAddShoppingItem_Taped); 
             this.AddChild(this.bAddShoppingItem);
             // Add ShoppingList DataGrid
-            this.dgShoppingList = new DataGrid("datagridShoppingList", 0, 0, 0, 320, 20, 10);
+            this.dgShoppingList = new DataGrid("datagridShoppingList", 0, 0, 0, 320, 20, 8);
             this.dgShoppingList.Draggable = false;
             this.dgShoppingList.SortableHeaders = true;
             this.dgShoppingList.TappableCells = true;
@@ -81,12 +82,43 @@ namespace microKitchen.Windows
             this.dgShoppingList.AddColumn(new DataGridColumn("Name", 170));
             this.dgShoppingList.AddColumn(new DataGridColumn("Type", 90));
             this.dgShoppingList.AddColumn(new DataGridColumn("Number", 50));
+            this.dgShoppingList.TapCellEvent += new OnTapCell(dgShoppingList_TapCellEvent);
             this.AddChild(this.dgShoppingList);
+
+            this.addShoppingItemDialog = new AddShoppingItemDialog();
+            this.addShoppingItemDialog.CloseButton.TapEvent += new OnTap(AddShoppingItemDialog_CloseButton_TapEvent);
+            this.addShoppingItemDialog.AddButton.TapEvent += new OnTap(AddShoppingItemDialog_AddButton_TapEvent);
+            this.shoppingList = Helpers.Configuration.LoadShoppingList();
+            this.UpdateShoppingListDataGrid();
         }
 
         #endregion
 
         #region "Events"
+
+        void dgShoppingList_TapCellEvent(object sender, TapCellEventArgs args)
+        {
+            Debug.Print(GlideTouch.Calibrated.ToString());
+            ModalResult result = Glide.MessageBoxManager.Show("Delete this item?", "Delete", ModalButtons.YesNo);
+            if (result == ModalResult.Yes)
+            {
+                object[] data = this.dgShoppingList.GetRowData(args.RowIndex);
+                if (null != data)
+                {
+                    for (int i = 0; i < this.shoppingList.Length(); i++)
+                    {
+                        ShoppingListItem item = this.shoppingList.GetItem(i);
+                        if (item.Name.Equals((string)data[0]) && item.Type == ((string)data[1]).ToShoppingItemTypes() && item.NumberOfItems == (int)data[2])
+                        {
+                            this.shoppingList.Remove(item);
+                            Helpers.Configuration.SaveShoppingList(this.shoppingList);
+                            this.UpdateShoppingListDataGrid();
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 
         private void OnButtonNavigateToHome_Taped(object sender)
         {
@@ -96,7 +128,30 @@ namespace microKitchen.Windows
 
         private void OnButtonAddShoppingItem_Taped(object sender)
         {
-            this.AddChild(new AddShoppingItemDialog());
+            Tween.SlideWindow(this, this.addShoppingItemDialog, Direction.Up);
+        }
+
+        private void AddShoppingItemDialog_CloseButton_TapEvent(object sender)
+        {
+            Tween.SlideWindow(this.addShoppingItemDialog, this, Direction.Up);
+            this.addShoppingItemDialog.DropdownCategories.Value = "";
+            this.addShoppingItemDialog.DropdownCategories.Text = "Select:";
+            this.addShoppingItemDialog.ItemName = string.Empty;
+            this.addShoppingItemDialog.NumberOfItems = 1;
+        }
+
+        private void AddShoppingItemDialog_AddButton_TapEvent(object sender)
+        {
+            Tween.SlideWindow(this.addShoppingItemDialog, this, Direction.Up);
+            this.shoppingList.Add(this.addShoppingItemDialog.ItemName,
+                             this.addShoppingItemDialog.DropdownCategories.Value.ToString().ToShoppingItemTypes(),
+                             this.addShoppingItemDialog.NumberOfItems);
+            this.addShoppingItemDialog.DropdownCategories.Value = "";
+            this.addShoppingItemDialog.DropdownCategories.Text = "Select:";
+            this.addShoppingItemDialog.ItemName = string.Empty;
+            this.addShoppingItemDialog.NumberOfItems = 1;
+            Helpers.Configuration.SaveShoppingList(this.shoppingList);
+            this.UpdateShoppingListDataGrid();
         }
 
         #endregion

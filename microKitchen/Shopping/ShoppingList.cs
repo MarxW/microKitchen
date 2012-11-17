@@ -6,7 +6,7 @@ using Microsoft.SPOT.Hardware;
 
 namespace microKitchen.Shopping
 {
-
+    [Serializable]
     enum ShoppingItemTypes
     {
         Meat_SeaFood,
@@ -15,6 +15,7 @@ namespace microKitchen.Shopping
         UnCategorised
     }
 
+    [Serializable]
     class ShoppingList
     {
         public ArrayList Items { get; set; }
@@ -68,6 +69,7 @@ namespace microKitchen.Shopping
     
     }
 
+    [Serializable]
     class ShoppingListItem
     {
         public string Name { get; set; }

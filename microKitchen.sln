@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "microKitchen", "microKitchen\microKitchen.csproj", "{7AAF25F3-6DA7-40E4-AD9F-D3DAB588AA4E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "microKitchen", "microKitchen\microKitchen.csproj", "{FB060583-5510-423B-B4AA-08D0C10D4A22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,12 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7AAF25F3-6DA7-40E4-AD9F-D3DAB588AA4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AAF25F3-6DA7-40E4-AD9F-D3DAB588AA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AAF25F3-6DA7-40E4-AD9F-D3DAB588AA4E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{7AAF25F3-6DA7-40E4-AD9F-D3DAB588AA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AAF25F3-6DA7-40E4-AD9F-D3DAB588AA4E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7AAF25F3-6DA7-40E4-AD9F-D3DAB588AA4E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{FB060583-5510-423B-B4AA-08D0C10D4A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB060583-5510-423B-B4AA-08D0C10D4A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB060583-5510-423B-B4AA-08D0C10D4A22}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{FB060583-5510-423B-B4AA-08D0C10D4A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB060583-5510-423B-B4AA-08D0C10D4A22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB060583-5510-423B-B4AA-08D0C10D4A22}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
