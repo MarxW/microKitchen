@@ -9,86 +9,63 @@ namespace microKitchen.Windows
 {
     class ShoppingWindow : Window
     {
-        private Button bNavigateToHome, bAddShoppingItem;
-        private DataGrid dgShoppingList;
-        private ShoppingList shoppingList;
+        public Button ButtonNavigateToHome { get; internal set; }
+        public Button ButtonAddShoppingItem { get; internal set; }
+        public DataGrid DataGridShoppingList { get; internal set; }
+        public ShoppingList ShoppingList { get; set; }
         private AddShoppingItemDialog addShoppingItemDialog;
-
-        public ShoppingList ShoppingList
-        {
-            get { return this.shoppingList; }
-            set { this.shoppingList = value; }
-        }
-
-        public Button ButtonNavigateToHome
-        {
-            get { return this.bNavigateToHome; }
-        }
-
-        public Button ButtonAddShoppingItem
-        {
-            get { return this.bAddShoppingItem; }
-        }
-
-        public DataGrid DataGridShoppingList
-        {
-            get { return this.dgShoppingList; }
-        }
 
         #region "Initialise"
 
         public ShoppingWindow()
             : base("wondowShopping", 320, 240)
         {
-            this.BackColor = Colors.White;
-            this.shoppingList = new ShoppingList();
             this.InitWindow();
-            this.UpdateShoppingListDataGrid();
         }
 
         public ShoppingWindow(ShoppingList shoppingList)
             : base("wondowShopping", 320, 240)
         {
-            this.BackColor = Colors.White;
-            this.shoppingList = shoppingList;
             this.InitWindow();
-            this.UpdateShoppingListDataGrid();
         }
 
         private void InitWindow()
         {
+            this.BackColor = Colors.White;
             // Cancel button
-            this.bNavigateToHome = new Button("buttonNavigateToHome", 0, 93, 205, 80, 32);
-            this.bNavigateToHome.Text = "Cancel";
-            this.bNavigateToHome.TintColor = Colors.Black;
-            this.bNavigateToHome.TintAmount = 10;
-            this.bNavigateToHome.TapEvent += new OnTap(OnButtonNavigateToHome_Taped); 
-            this.AddChild(this.bNavigateToHome);
+            this.ButtonNavigateToHome = new Button("buttonNavigateToHome", 0, 93, 205, 80, 32);
+            this.ButtonNavigateToHome.Text = "Cancel";
+            this.ButtonNavigateToHome.TintColor = Colors.Black;
+            this.ButtonNavigateToHome.TintAmount = 10;
+            this.ButtonNavigateToHome.TapEvent += new OnTap(OnButtonNavigateToHome_Taped);
+            this.AddChild(this.ButtonNavigateToHome);
             // Add Item Button
-            this.bAddShoppingItem = new Button("buttonNavigateToHome", 0, 5, 205, 80, 32);
-            this.bAddShoppingItem.Text = "Add Item";
-            this.bAddShoppingItem.TintColor = Colors.Black;
-            this.bAddShoppingItem.TintAmount = 10;
-            this.bAddShoppingItem.TapEvent += new OnTap(OnButtonAddShoppingItem_Taped); 
-            this.AddChild(this.bAddShoppingItem);
+            this.ButtonAddShoppingItem = new Button("buttonNavigateToHome", 0, 5, 205, 80, 32);
+            this.ButtonAddShoppingItem.Text = "Add Item";
+            this.ButtonAddShoppingItem.TintColor = Colors.Black;
+            this.ButtonAddShoppingItem.TintAmount = 10;
+            this.ButtonAddShoppingItem.TapEvent += new OnTap(OnButtonAddShoppingItem_Taped);
+            this.AddChild(this.ButtonAddShoppingItem);
             // Add ShoppingList DataGrid
-            this.dgShoppingList = new DataGrid("datagridShoppingList", 0, 0, 0, 320, 20, 8);
-            this.dgShoppingList.Draggable = false;
-            this.dgShoppingList.SortableHeaders = true;
-            this.dgShoppingList.TappableCells = true;
-            this.dgShoppingList.ShowHeaders = true;
-            this.dgShoppingList.ShowScrollbar = true;
-            this.dgShoppingList.ScrollbarWidth = 10;
-            this.dgShoppingList.AddColumn(new DataGridColumn("Name", 170));
-            this.dgShoppingList.AddColumn(new DataGridColumn("Type", 90));
-            this.dgShoppingList.AddColumn(new DataGridColumn("Number", 50));
-            this.dgShoppingList.TapCellEvent += new OnTapCell(dgShoppingList_TapCellEvent);
-            this.AddChild(this.dgShoppingList);
+            this.DataGridShoppingList = new DataGrid("datagridShoppingList", 0, 0, 0, 320, 20, 8);
+            this.DataGridShoppingList.Draggable = false;
+            this.DataGridShoppingList.SortableHeaders = true;
+            this.DataGridShoppingList.TappableCells = true;
+            this.DataGridShoppingList.ShowHeaders = true;
+            this.DataGridShoppingList.ShowScrollbar = true;
+            this.DataGridShoppingList.ScrollbarWidth = 10;
+            this.DataGridShoppingList.AddColumn(new DataGridColumn("Name", 170));
+            this.DataGridShoppingList.AddColumn(new DataGridColumn("Type", 90));
+            this.DataGridShoppingList.AddColumn(new DataGridColumn("Number", 50));
+            this.DataGridShoppingList.TapCellEvent += new OnTapCell(dgShoppingList_TapCellEvent);
+            this.AddChild(this.DataGridShoppingList);
 
             this.addShoppingItemDialog = new AddShoppingItemDialog();
             this.addShoppingItemDialog.CloseButton.TapEvent += new OnTap(AddShoppingItemDialog_CloseButton_TapEvent);
             this.addShoppingItemDialog.AddButton.TapEvent += new OnTap(AddShoppingItemDialog_AddButton_TapEvent);
-            this.shoppingList = Helpers.Configuration.LoadShoppingList();
+            this.ShoppingList = Helpers.Configuration.LoadShoppingList();
+            this.UpdateShoppingListDataGrid();
+
             this.UpdateShoppingListDataGrid();
         }
 

@@ -12,7 +12,7 @@ namespace microKitchen.Windows
             : base("splashScreen", 320, 240)
         {
             this.BackColor = Colors.White;
-            this.BackImage = Resources.GetBitmap(Resources.BitmapResources.splashscreen);
+            this.BackImage = Resources.GetBitmap(Resources.BitmapResources.screen_background);
         }
     }
 }

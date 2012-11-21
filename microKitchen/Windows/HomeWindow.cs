@@ -29,6 +29,7 @@ namespace microKitchen.Windows
         private void InitWindow()
         {
             this.BackColor = Colors.White;
+            this.BackImage = Resources.GetBitmap(Resources.BitmapResources.screen_background);
             this.ButtonNavigateToShopping = new Button("buttonNavigateToShopping", 0, 6, 190, 110, 32);
             this.ButtonNavigateToShopping.Text = "Shopping";
             this.ButtonNavigateToShopping.TintColor = Colors.Black;

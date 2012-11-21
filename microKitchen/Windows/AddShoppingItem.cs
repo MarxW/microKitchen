@@ -10,8 +10,11 @@ namespace microKitchen.Windows
 {
     class AddShoppingItemDialog : Window
     {
-        private Dropdown dropdownCategories;
-        private Button buttonAddItem, buttonClose, buttonCoutnUp, buttonCountDown;
+        public Dropdown DropdownCategories { get; internal set; }
+        public Button CloseButton { get; internal set; }
+        public Button AddButton { get; internal set; }
+
+        private Button buttonCoutnUp, buttonCountDown;
         private TextBox textboxItemName, textboxNumberOfItems;
         private List shoppingTypes;
 
@@ -34,21 +37,6 @@ namespace microKitchen.Windows
             set { this.textboxItemName.Text = value; }
         }
 
-        public Dropdown DropdownCategories
-        {
-            get { return this.dropdownCategories; }
-        }
-
-        public Button CloseButton
-        {
-            get { return this.buttonClose; }
-        }
-
-        public Button AddButton
-        {
-            get { return this.buttonAddItem; }
-        }
-
         #region "Initialise"
 
         public AddShoppingItemDialog()
@@ -67,17 +55,17 @@ namespace microKitchen.Windows
         {
             this.BackColor = Colors.White;
 
-            this.dropdownCategories = new Dropdown("dropdownCategory", 0, 10, 57, 300, 32);
-            this.dropdownCategories.Options.Add(new object[] { ShoppingItemTypes.Dairy.GetStringValue(), ShoppingItemTypes.Dairy.GetStringValue() });
-            this.dropdownCategories.Options.Add(new object[] { ShoppingItemTypes.Frozen.GetStringValue(), ShoppingItemTypes.Frozen.GetStringValue() });
-            this.dropdownCategories.Options.Add(new object[] { ShoppingItemTypes.Meat_SeaFood.GetStringValue(), ShoppingItemTypes.Meat_SeaFood.GetStringValue() });
-            this.dropdownCategories.Options.Add(new object[] { ShoppingItemTypes.UnCategorised.GetStringValue(), ShoppingItemTypes.UnCategorised.GetStringValue() });
-            this.dropdownCategories.Text = "Select:";
-            this.dropdownCategories.Alpha = 255;
-            this.dropdownCategories.TapEvent += new OnTap(dropDownCategories_TapEvent);
-            this.AddChild(this.dropdownCategories);
+            this.DropdownCategories = new Dropdown("dropdownCategory", 0, 10, 57, 300, 32);
+            this.DropdownCategories.Options.Add(new object[] { ShoppingItemTypes.Dairy.GetStringValue(), ShoppingItemTypes.Dairy.GetStringValue() });
+            this.DropdownCategories.Options.Add(new object[] { ShoppingItemTypes.Frozen.GetStringValue(), ShoppingItemTypes.Frozen.GetStringValue() });
+            this.DropdownCategories.Options.Add(new object[] { ShoppingItemTypes.Meat_SeaFood.GetStringValue(), ShoppingItemTypes.Meat_SeaFood.GetStringValue() });
+            this.DropdownCategories.Options.Add(new object[] { ShoppingItemTypes.UnCategorised.GetStringValue(), ShoppingItemTypes.UnCategorised.GetStringValue() });
+            this.DropdownCategories.Text = "Select:";
+            this.DropdownCategories.Alpha = 255;
+            this.DropdownCategories.TapEvent += new OnTap(dropDownCategories_TapEvent);
+            this.AddChild(this.DropdownCategories);
 
-            this.shoppingTypes = new List(dropdownCategories.Options, 200);
+            this.shoppingTypes = new List(DropdownCategories.Options, 200);
             this.shoppingTypes.CloseEvent += new OnClose(shoppingTypes_CloseEvent);
 
             this.textboxNumberOfItems = new TextBox("textboxNumberOfItems", 0, 75, 100, 80, 32);
@@ -99,24 +87,24 @@ namespace microKitchen.Windows
             this.buttonCountDown.TapEvent += new OnTap(buttonCountDown_TapEvent);
             this.AddChild(this.buttonCountDown);
 
-            this.buttonClose = new Button("buttonCancel", 0, 75, 180, 150, 32);
-            this.buttonClose.Text = "Cancel";
-            this.buttonClose.TintColor = Colors.Black;
-            this.buttonClose.TintAmount = 10;
-            this.buttonClose.TapEvent += new OnTap(buttonClose_TapEvent);
-            this.AddChild(this.buttonClose);
+            this.CloseButton = new Button("buttonCancel", 0, 75, 180, 150, 32);
+            this.CloseButton.Text = "Cancel";
+            this.CloseButton.TintColor = Colors.Black;
+            this.CloseButton.TintAmount = 10;
+            this.CloseButton.TapEvent += new OnTap(buttonClose_TapEvent);
+            this.AddChild(this.CloseButton);
 
             this.textboxItemName = new TextBox("textboxItemName", 0, 10, 15, 300, 32);
             this.textboxItemName.Alpha = 255;
             this.textboxItemName.TapEvent += new OnTap(Glide.OpenKeyboard);
             this.AddChild(this.textboxItemName);
 
-            this.buttonAddItem = new Button("buttonAddItem", 0, 75, 140, 150, 32);
-            this.buttonAddItem.Text = "Add";
-            this.buttonAddItem.TintColor = Colors.Black;
-            this.buttonAddItem.TintAmount = 10;
-            this.buttonAddItem.TapEvent += new OnTap(buttonAddItem_TapEvent);
-            this.AddChild(this.buttonAddItem);
+            this.AddButton = new Button("buttonAddItem", 0, 75, 140, 150, 32);
+            this.AddButton.Text = "Add";
+            this.AddButton.TintColor = Colors.Black;
+            this.AddButton.TintAmount = 10;
+            this.AddButton.TapEvent += new OnTap(buttonAddItem_TapEvent);
+            this.AddChild(this.AddButton);
         }
 
         #endregion

@@ -130,17 +130,14 @@
   <data name="Keyboard_320x128_Uppercase" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\Keyboard_320x128_Uppercase.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Modal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\Modal.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="NinaB" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\NinaB.tinyfnt;System.Byte[], mscorlib, Culture=neutral, PublicKeyToken=null</value>
   </data>
+  <data name="screen_background" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Resources\screen_background.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="small" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Resources\small.tinyfnt;System.Byte[], mscorlib, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="splashscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>Resources\splashscreen.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="windowHome" xml:space="preserve">
     <value>&lt;Glide Version="1.0.5"&gt;
